@@ -1,17 +1,11 @@
-```
-### forEach()
-
-Without using the native “Array.prototype.forEach” method of JavaScript, compose a function titled “myEach” that will take in an array of elements and executes any callback function (provided by you) on each of those elements.
-
-```
-function myEach(array, callback) {
-    for (let i = 0; i < array.length; i++) {
-        callback(array[i], i, array);
+//forEach()
+Array.prototype.forEach = function myEach(callback) {
+    for (let i = 0; i < this.length; i++) {
+        callback(this[i], i, this);
     }
 }
 
 let numbers = [1, 2, 3, 4, 5];
-
 numbers.forEach(function (number) {
     console.log(number); // 1 2 3 4 5
 });
@@ -22,12 +16,11 @@ numbers.forEach(function (number) {
 Without using the native “Array.prototype.map” method of JavaScript, compose a function titled “myMap” that will take in an array of elements and executes a callback function (provided by you) on each of those elements.
 
 ```
-function myMap() {
+Array.prototype.map = function myMap(callback) {
     let result = [];
-    for (let i = 0; i < array.length; i++) {
-        result.push(callback(array[i], i, array));
+    for (let i = 0; i < this.length; i++) {
+        result.push(callback(this[i], i, this));
     }
-
     return result;
 }
 
@@ -110,53 +103,43 @@ Without using the native “Array.prototype.reduce” method of JavaScript, comp
 ```
 function myReduce(array, callback, initialValue) {
     let accumulator = initialValue;
-  
+
     for (let i = 0; i < array.length; i++) {
-      accumulator = callback(accumulator, array[i]);
+        accumulator = callback(accumulator, array[i]);
     }
-  
+
     return accumulator;
-  }
+}
 
 let numbers = [1, 2, 3, 4, 5];
 let sum = numbers.reduce(function (acc, num) {
     return acc + num;
 }, 0);
 console.log(sum); // 15
-```
 
-### includes()
-
-Without using the native “Array.prototype.includes” method of JavaScript, compose a function titled “myIncludes” that will take in an array of elements and indicates whether or not a target element is contained within the input array. This returns a boolean.
-
-```
-function myIncludes(array, target) {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] === target) {
-        return true;
-      }
+//includes()
+Array.prototype.includes = function myIncludes(target) {
+    for (let i = 0; i < this.length; i++) {
+        if (this[i] === target) {
+            return true;
+        }
     }
     return false;
-  }
+}
 const fruits = ['apple', 'banana', 'orange', 'grape'];
 const hasBanana = fruits.includes('banana');
-
 console.log(hasBanana); // true
-```
 
-### indexOf()
 
-Without using the native “Array.prototype.indexOf” method of JavaScript, compose a function titled “myIndexOf” that will take in an array of elements and returns the index of the first encounter of a target element (if it is found) or -1 if that element does not exist within the input array.
-
-```
-function myIndexOf(array, target) {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i] === target) {
-        return i;
-      }
+//indexOf()
+Array.prototype.indexOf = function myIndexOf(target) {
+    for (let i = 0; i < this.length; i++) {
+        if (this[i] === target) {
+            return i;
+        }
     }
     return -1;
-  }
+}
 
 const fruits = ['apple', 'banana', 'orange', 'grape'];
 
@@ -165,17 +148,12 @@ console.log(indexOrange); // 2
 
 const indexPear = fruits.indexOf('pear');
 console.log(indexPear); // -1
-```
 
-### push()
-
-Without using the native “Array.prototype.push” method of JavaScript, compose a function titled “myPush” that will take in an array of elements as well as an elementToAdd and append that element to the end of the array.
-
-```
+//push()
 Array.prototype.push = function myPush(elementToAdd) {
     this[this.length] = elementToAdd;
-  return this.length;
-  }
+    return this.length;
+}
 let fruits = ['apple', 'banana'];
 let length = fruits.push('orange');
 console.log(fruits); // ['apple', 'banana', 'orange']
