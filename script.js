@@ -5,17 +5,8 @@ Array.prototype.forEach = function myEach(callback) {
     }
 }
 
-let numbers = [1, 2, 3, 4, 5];
-numbers.forEach(function (number) {
-    console.log(number); // 1 2 3 4 5
-});
-```
 
-### map()
-
-Without using the native “Array.prototype.map” method of JavaScript, compose a function titled “myMap” that will take in an array of elements and executes a callback function (provided by you) on each of those elements.
-
-```
+//map()
 Array.prototype.map = function myMap(callback) {
     let result = [];
     for (let i = 0; i < this.length; i++) {
@@ -24,98 +15,51 @@ Array.prototype.map = function myMap(callback) {
     return result;
 }
 
-let numbers = [1, 2, 3, 4, 5];
 
-let doubledNumbers = numbers.map(function (number) {
-    return number * 2;
-});
-
-console.log(doubledNumbers); // [2, 4, 6, 8, 10]
-```
-
-### filter()
-
-Without using the native “Array.prototype.filter” method of JavaScript, compose a function titled “myFilter” that will take in an array of elements and executes a callback function (provided by you) on each of those elements.
-
-```
-function myFilter() {
+//filter()
+Array.prototype.filter = function myFilter() {
     let result = [];
-    for (let i = 0; i < array.length; i++) {
-        if (callback(array[i])) {
-            result.push(array[i]);
+    for (let i = 0; i < this.length; i++) {
+        if (callback(this[i])) {
+            result.push(this[i]);
         }
     }
     return result;
 }
-let numbers = [1, 2, 3, 4, 5];
-let evenNumbers = numbers.filter(function (number) { return number % 2 === 0; });
 
-console.log(evenNumbers); // [2, 4]
-```
 
-### some() (aka any())
-
-Without using the native “Array.prototype.some” method of JavaScript, compose a function titled “mySome” that will take in an array of elements and executes a callback function (provided by you) on each of those elements.
-
-```
-function mySome(array, callback) {
-    for (let i = 0; i < array.length; i++) {
-        if (callback(array[i])) {
+//some()
+Array.prototype.some = function mySome(callback) {
+    for (let i = 0; i < this.length; i++) {
+        if (callback(this[i])) {
             return true;
         }
     }
-
     return false;
 }
 
-let numbers = [1, 2, 3, 4, 5];
-let hasEvenNumber = numbers.some(function (num) {
-    return num % 2 === 0;
-});
-console.log(hasEvenNumber); // true
-```
 
-### every()
-
-Without using the native “Array.prototype.every” method of JavaScript, compose a function titled “myEvery” that will take in an array of elements and executes a callback function (provided by you) on each of those elements.
-
-```
-function myEvery(array, callback) {
-    for (let i = 0; i < array.length; i++) {
-        if (!callback(array[i])) {
+//every()
+Array.prototype.every = function myEvery(callback) {
+    for (let i = 0; i < this.length; i++) {
+        if (!callback(this[i])) {
             return false;
         }
     }
     return true;
 }
 
-let numbers = [2, 4, 6, 8, 10];
-let allNumbersEven = numbers.every(function (num) {
-    return num % 2 === 0;
-});
-console.log(allNumbersEven); // true
-```
 
-### reduce()
-
-Without using the native “Array.prototype.reduce” method of JavaScript, compose a function titled “myReduce” that will take in an array of elements and executes a callback function (provided by you) on each of those elements.
-
-```
-function myReduce(array, callback, initialValue) {
+//reduce
+Array.prototype.reduce = function myReduce(callback, initialValue) {
     let accumulator = initialValue;
 
-    for (let i = 0; i < array.length; i++) {
-        accumulator = callback(accumulator, array[i]);
+    for (let i = 0; i < this.length; i++) {
+        accumulator = callback(accumulator, this[i]);
     }
-
     return accumulator;
 }
 
-let numbers = [1, 2, 3, 4, 5];
-let sum = numbers.reduce(function (acc, num) {
-    return acc + num;
-}, 0);
-console.log(sum); // 15
 
 //includes()
 Array.prototype.includes = function myIncludes(target) {
@@ -126,9 +70,6 @@ Array.prototype.includes = function myIncludes(target) {
     }
     return false;
 }
-const fruits = ['apple', 'banana', 'orange', 'grape'];
-const hasBanana = fruits.includes('banana');
-console.log(hasBanana); // true
 
 
 //indexOf()
@@ -141,86 +82,103 @@ Array.prototype.indexOf = function myIndexOf(target) {
     return -1;
 }
 
-const fruits = ['apple', 'banana', 'orange', 'grape'];
-
-const indexOrange = fruits.indexOf('orange');
-console.log(indexOrange); // 2
-
-const indexPear = fruits.indexOf('pear');
-console.log(indexPear); // -1
 
 //push()
 Array.prototype.push = function myPush(elementToAdd) {
     this[this.length] = elementToAdd;
     return this.length;
 }
-let fruits = ['apple', 'banana'];
-let length = fruits.push('orange');
-console.log(fruits); // ['apple', 'banana', 'orange']
-console.log(length); // 3
-```
 
-### lastIndexOf()
 
-Without using the native “Array.prototype.lastIndexOf” method of JavaScript, compose a function titled “myUnshift” (typo) that will take in an array of elements and returns the index of the last encounter of a target element (if it is found) or -1 if that element does not exist within the input array.
+//lastIndexOf
+Array.prototype.lastIndexOf = function myUnshift(target) {
+    for (let i = this.length - 1; i >= 0; i--) {
+        if (this[i] === target) {
+            return i;
+        }
+    }
+    return -1;
+}
 
-```
-const animals = ['cat', 'dog', 'bird', 'dog', 'fish'];
 
-const lastIndexDog = animals.lastIndexOf('dog');
-console.log(lastIndexDog); // 3
+//Object.keys()
+Object.keys = function grabKeys(obj) {
+    const keys = [];
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            keys.push(key);
+        }
+    }
+    return keys;
+}
 
-const lastIndexCow = animals.lastIndexOf('cow');
-console.log(lastIndexCow); // -1
-```
 
-### Object.keys()
-
-Without using the native “Object.keys()” method of JavaScript, compose a function titled “grabKeys” that will take in an object and return all of the keys of the key:value pairs of that object. Modify the Object class, appending a static method to the Object class., appending a static method to the Object class. Leverage the “for...in” loop.
-
-```
-const student = {
-    firstname: 'John',
-    lastname: 'Doe',
-    age: 22,
-    gender: 'male'
+//Object.values()
+Object.values = function grabValues(obj) {
+    var values = [];
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            values.push(obj[key]);
+        }
+    }
+    return values;
 };
 
-const keys = Object.keys(student);
-console.log(keys); // ['firstname', 'lastname', 'age', 'gender']
+
+// Sum of a Range
+function sum(result) {
+    let sum = 0;
+    for (i = 0; i < result.length; i++) {
+        sum += result[i];
+    }
+    return result;
+}
+function range(min, max) {
+    let result = [];
+    for (let i = min; i <= max; i++) {
+        result.push(i);
+    }
+    return result;
+}
+
+//Reversing an Array
+function reverseArray(array) {
+    let reversedArray = [];
+    for (let i = array.length - 1; i >= 0; i--) {
+        reversedArray.push(array[i]);
+    }
+    return reversedArray;
+}
+
+function reverseArrayInPlace(array) {
+    let length = array.length;
+  for (let i = 0; i < Math.floor(length / 2); i++) {
+    let temp = array[i];
+    array[i] = array[length - 1 - i];
+    array[length - 1 - i] = temp;
+  }
+}
+
+//A List
+//Deep Comparison
 ```
+    //Miscellaneous Problems (1)
 
-### Object.values()
+    - [] Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
-Without using the native “Object.values()” method of JavaScript, compose a function titled “grabValues” that will take in an object and return all of the values of the key:value pairs of that object. Modify the Object class, appending a static method to the Object class. Leverage the “for...in” loop.
-
-```
-const car = {
-    make: 'Toyota',
-    model: 'Corolla',
-    year: 2020
-};
-
-const values = Object.values(car);
-console.log(values); // ["Toyota", "Corolla", 2020]
-```
-
-## Miscellaneous Problems (4)
-
-[From Chapter 4 of Eloquent JavaScript](https://eloquentjavascript.net/04_data.html)
-
-- [ ] Sum of a Range
-- [ ] Reversing an Array
-- [ ] A List
-- [ ] Deep Comparison
-
-## Miscellaneous Problems (1)
-
-- [ ] Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-
-```
 function moveZeros(nums) {
-    // Code logic goes here
+    let i = 0;
+    for (let num of nums) {
+        if (num !== 0) {
+            nums[i] = num;
+            i++;
+        }
+    }
+    while (i < nums.length) {
+        nums[i] = 0;
+        i++;
+    }
+    return nums;
 }
 ```
 
@@ -229,8 +187,3 @@ Example:
 ```
 Input: [0, 1, 0, 3, 12]
 Output: [1, 3, 12, 0, 0]
-    ```
-
-**Note:**
-
-You must do this in-place without making a copy of the array.
