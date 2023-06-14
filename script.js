@@ -143,28 +143,69 @@ function range(min, max) {
 
 //Reversing an Array
 function reverseArray(array) {
-    let reversedArray = [];
+    let reverse = [];
     for (let i = array.length - 1; i >= 0; i--) {
-        reversedArray.push(array[i]);
+        reverse.push(array[i]);
     }
-    return reversedArray;
+    return reverse;
 }
-
 function reverseArrayInPlace(array) {
-    let length = array.length;
-  for (let i = 0; i < Math.floor(length / 2); i++) {
-    let temp = array[i];
-    array[i] = array[length - 1 - i];
-    array[length - 1 - i] = temp;
-  }
+    let len = array.length;
+    for (let i = 0; i < Math.floor(len / 2); i++) {
+        let temp = array[i];
+        array[i] = array[len - 1 - i];
+        array[len - 1 - i] = temp;
+    }
 }
 
 //A List
+function arrayToList(arr) {
+    let a = null;
+    for (let i = arr.length - 1; i >= 0; i--) {
+        a = { value: arr[i], rest: a };
+    }
+    return a;
+}
+function listToArray(list) {
+    let a = [];
+    while (list != null) {
+        a.push(list.value);
+        list = list.rest;
+    }
+    return a;
+}
+function prepend(num, list) { return { value: element, rest: list }; }
+function nth(list, term) {
+    if (list === null)
+        return undefined;
+    if (n === 0) {
+        return list.value;
+    }
+    return nth(list.rest, n - 1);
+}
 //Deep Comparison
-```
-    //Miscellaneous Problems (1)
+function deepEqual(val1, val2) {
+    if (val1 === val2)
+        return true;
+    if (typeof val1 !== 'object' || val1 === null || typeof val2 !== 'object' || val2 === null) 
+        return false;
+    const key1 = Object.keys(val1);
+    const key2 = Object.keys(val2);
+    if (key1.length !== key2.length) {
+        return false;
+    }
+    for (let key of key1) {
+        if (!key2.includes(key) || !deepEqual(val1[key], val2[key])) {
+            return false;
+        }
+    }
+    return true;
+}
 
-    - [] Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+//Miscellaneous Problems (1)
+
+-[] Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
 function moveZeros(nums) {
     let i = 0;
@@ -180,10 +221,6 @@ function moveZeros(nums) {
     }
     return nums;
 }
-```
 
-Example:
-
-```
 Input: [0, 1, 0, 3, 12]
 Output: [1, 3, 12, 0, 0]
